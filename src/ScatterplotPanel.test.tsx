@@ -54,9 +54,44 @@ const getProps = () => {
   };
 };
 
+const getPropsWithoutData = () => {
+  return {
+    options: {
+      circleRadius: '1',
+      colorRange: 'warm',
+    },
+    data: {
+      series: [],
+    },
+    width: 100,
+    height: 100,
+  };
+};
+
 describe('<ScatterplotPanel />', () => {
-  it('renders successfully', () => {
-    const wrapper = shallow(<ScatterplotPanel {...getProps()} />);
+  describe('when two data series are present', () => {
+    it('renders graph successfully', () => {
+      const wrapper = shallow(<ScatterplotPanel {...getProps()} />);
+      const graph = wrapper.find('svg g g');
+
+      expect(graph).toHaveLength(3);
+    });
+
+    it('renders graph with 3 circles', () => {
+      const wrapper = shallow(<ScatterplotPanel {...getProps()} />);
+      const circles = wrapper.find('svg g g circle');
+
+      expect(circles).toHaveLength(3);
+    });
+  });
+
+  describe('when no data series is present', () => {
+    it('renders a text node', () => {
+      const wrapper = shallow(<ScatterplotPanel {...getPropsWithoutData()} />);
+      const text = wrapper.find('svg g g text');
+
+      expect(text).toHaveLength(1);
+    });
   });
 });
 

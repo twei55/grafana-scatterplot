@@ -1,6 +1,6 @@
 # Grafana Scatterplot Plugin
 
-A Scatter plot is a type of plot to visualize the dependency between to variables over time. The data are displayed as a collection of points, 
+A Scatter plot is a type of plot to visualize the dependency between two variables over time. The data are displayed as a collection of points, 
 each having the value of one variable determining the position on the horizontal axis and the value of the other variable determining the position on the vertical axis.
 
 Additionally data points are color coded over time.

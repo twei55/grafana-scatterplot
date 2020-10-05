@@ -80,7 +80,7 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
                 />
               ))
             ) : (
-              <circle r="0" />
+              <text transform={`translate(${chartWidth / 2 - 20}, ${chartHeight / 2 - 20})`}>No data</text>
             )}
           </g>
           <g
@@ -90,7 +90,7 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
             }}
           />
           <text className="axisLabel" transform={`translate(${chartWidth / 2}, ${chartHeight + margin.bottom - 10})`}>
-            {data.series.length > 1 ? data.series[0].name : 'X'}
+            {data.series.length > 1 ? data.series[0].name : ''}
           </text>
           <g
             ref={node => {
@@ -101,7 +101,7 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
             className="axisLabel"
             transform={`rotate(-90), translate(${-(chartHeight / 2)}, ${-(margin.left - 10)})`}
           >
-            {data.series.length > 1 ? data.series[1].name : 'Y'}
+            {data.series.length > 1 ? data.series[1].name : ''}
           </text>
         </g>
       </svg>
