@@ -1,0 +1,34 @@
+{
+  "type": "panel",
+  "name": "Scatterplot",
+  "id": "gfz-scatterplot",
+  "info": {
+    "description": "Visualize data in Scatterplots",
+    "author": {
+      "name": "Tobias Weiß",
+      "url": "https://www.gfz-potsdam.de"
+    },
+    "keywords": [],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/grafana/simple-react-panel"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/grafana/simple-react-panel/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaVersion": "7.0.x",
+    "plugins": []
+  }
+}
