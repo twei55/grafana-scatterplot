@@ -20,9 +20,9 @@
     "@grafana/toolkit": "7.0.1",
     "@grafana/ui": "7.0.1",
     "@types/d3": "^5.7.2",
-    "@types/enzyme": "3.10.5",
-    "@types/enzyme-adapter-react-16": "1.0.6",
-    "emotion": "10.0.27"
+    "emotion": "10.0.27",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5"
   },
   "engines": {
     "node": ">=12 <13"
