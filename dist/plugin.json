@@ -1,0 +1,34 @@
+{
+  "type": "panel",
+  "name": "Scatter Plot",
+  "id": "gfz-scatterplot",
+  "info": {
+    "description": "Visualize your data in a Scatter Plot",
+    "author": {
+      "name": "Tobias Weiß",
+      "url": "https://www.gfz-potsdam.de"
+    },
+    "keywords": ["scatterplot", "scatter diagram", "scatter"],
+    "logos": {
+      "small": "img/scatter.svg",
+      "large": "img/scatter.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "git.gfz-potsdam.de/tsm/grafana-scatterplot-panel"
+      },
+      {
+        "name": "License",
+        "url": "git.gfz-potsdam.de/tsm/grafana-scatterplot-panel/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [],
+    "version": "0.1.0",
+    "updated": "2020-10-06"
+  },
+  "dependencies": {
+    "grafanaVersion": "7.0.x",
+    "plugins": []
+  }
+}
