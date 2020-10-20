@@ -1,9 +1,0 @@
-stages:
-  - test
-
-test:
-  stage: test
-  image: node:12.18.3-stretch
-  script:
-    - yarn install --pure-lockfile
-    - yarn test
