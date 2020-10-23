@@ -8,12 +8,11 @@
     "dev": "grafana-toolkit plugin:dev",
     "watch": "grafana-toolkit plugin:dev --watch"
   },
-  "repository": "github:grafana/simple-react-panel",
+  "repository": "github:twei55/grafana-scatterplot",
   "author": "Tobias Weiß",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/grafana/simple-react-panel/issues",
-    "email": "plugins@grafana.com"
+    "url": "https://github.com/twei55/grafana-scatterplot/issues"
   },
   "devDependencies": {
     "@grafana/data": "7.0.1",
