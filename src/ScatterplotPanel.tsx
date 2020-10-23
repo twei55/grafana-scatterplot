@@ -78,7 +78,11 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
                   style={{ fill: `${colorScale(allDataTimes[0][index])}` }}
                   data-values={`${value}, ${allDataValues[1][index]}`}
                   r={circleRadius}
-                />
+                >
+                  <title>
+                    X: {`${value}`}, Y: {`${allDataValues[1][index]}`}
+                  </title>
+                </circle>
               ))
             ) : (
               <text transform={`translate(${chartWidth / 2 - 20}, ${chartHeight / 2 - 20})`}>No data</text>
