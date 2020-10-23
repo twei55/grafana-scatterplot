@@ -41,5 +41,39 @@ export const plugin = new PanelPlugin<SimpleOptions>(ScatterplotPanel).setPanelO
           { value: '4', label: '4' },
         ],
       },
+    })
+    .addRadio({
+      path: 'scaleModeX',
+      defaultValue: 'linear',
+      name: 'X-Axis: Scale Mode',
+      settings: {
+        options: [
+          {
+            value: 'linear',
+            label: 'Linear',
+          },
+          {
+            value: 'logarithmic',
+            label: 'Logarithmic',
+          },
+        ],
+      },
+    })
+    .addRadio({
+      path: 'scaleModeY',
+      defaultValue: 'linear',
+      name: 'Y-Axis: Scale Mode',
+      settings: {
+        options: [
+          {
+            value: 'linear',
+            label: 'Linear',
+          },
+          {
+            value: 'logarithmic',
+            label: 'Logarithmic',
+          },
+        ],
+      },
     });
 });

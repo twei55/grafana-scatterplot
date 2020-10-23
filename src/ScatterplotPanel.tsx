@@ -25,24 +25,24 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
   // Horizontal axis
   const xDomainMin = allDataValues.length > 1 ? d3.min(allDataValues[0]) : 0;
   const xDomainMax = allDataValues.length > 1 ? d3.max(allDataValues[0]) : 100;
-  const xScale = d3
-    .scaleLinear()
-    .domain([xDomainMin, xDomainMax])
-    .range([0, chartWidth]);
-  const xAxis = d3.axisBottom(xScale);
+  const xScale = scale(options.scaleModeX)()
+    .domain([domainMin(xDomainMin, options.scaleModeX), xDomainMax])
+    .range([0, chartWidth])
+    .clamp(true)
+    .nice();
+  const xAxis = getAxis('bottom', xScale, options.scaleModeX);
 
   // Vertical axis
   const yDomainMin = allDataValues.length > 1 ? d3.min(allDataValues[1]) : 0;
   const yDomainMax = allDataValues.length > 1 ? d3.max(allDataValues[1]) : 100;
-  const yScale = d3
-    .scaleLinear()
-    .domain([yDomainMin, yDomainMax])
-    .range([chartHeight, 0]);
-  const yAxis = d3.axisLeft(yScale);
+  const yScale = scale(options.scaleModeY)()
+    .domain([domainMin(yDomainMin, options.scaleModeY), yDomainMax])
+    .range([chartHeight, 0])
+    .clamp(true);
+  const yAxis = getAxis('left', yScale, options.scaleModeY);
 
   const timeMin = allDataTimes.length > 1 ? d3.min(allDataTimes[0]) : 0;
   const timeMax = allDataTimes.length > 1 ? d3.max(allDataTimes[0]) : 100;
-
   const colorScale = d3
     .scaleQuantize<string>()
     .range(selectedColorRange(options.colorRange))
@@ -76,6 +76,7 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
                   key={'circle-' + index}
                   transform={`translate(${xScale(value)}, ${yScale(allDataValues[1][index])})`}
                   style={{ fill: `${colorScale(allDataTimes[0][index])}` }}
+                  data-values={`${value}, ${allDataValues[1][index]}`}
                   r={circleRadius}
                 />
               ))
@@ -126,6 +127,30 @@ const selectedColorRange = (selectedOption: string) => {
       break;
   }
   return colorRange;
+};
+
+// A log scale domain must not include or cross zero.
+// https://stackoverflow.com/questions/40438911/logarithmic-scale-returns-nan
+export const domainMin = (domainMin: number, scaleMode: string) => {
+  return domainMin === 0 && scaleMode === 'logarithmic' ? 1e-6 : domainMin;
+};
+
+export const scale = (scaleMode: string) => {
+  return scaleMode === 'linear' ? d3.scaleLinear : d3.scaleLog;
+};
+
+export const getAxis = (orientation: string, scale: any, scaleMode: string) => {
+  let axis;
+  if (orientation === 'bottom') {
+    axis = d3.axisBottom(scale);
+  } else {
+    axis = d3.axisLeft(scale);
+  }
+  if (scaleMode === 'logarithmic') {
+    axis = axis.ticks(10, '~s');
+  }
+
+  return axis;
 };
 
 export const getValuesFromDataFrames = (dataSeries: any[]) => {

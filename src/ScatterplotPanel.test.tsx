@@ -3,7 +3,9 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { ScatterplotPanel, getValuesFromDataFrames } from './ScatterplotPanel';
+import * as d3 from 'd3';
+
+import { ScatterplotPanel, getValuesFromDataFrames, domainMin, scale } from './ScatterplotPanel';
 
 configure({ adapter: new Adapter() });
 
@@ -12,6 +14,8 @@ const getProps = () => {
     options: {
       circleRadius: '1',
       colorRange: 'warm',
+      scaleModeX: 'linear',
+      scaleModeY: 'linear',
     },
     data: {
       series: [
@@ -59,6 +63,7 @@ const getPropsWithoutData = () => {
     options: {
       circleRadius: '1',
       colorRange: 'warm',
+      scaleMode: 'linear',
     },
     data: {
       series: [],
@@ -107,5 +112,33 @@ describe('getValuesFromDataFrames', () => {
         [4, 5, 6],
       ],
     ]);
+  });
+});
+
+describe('domainMin', () => {
+  it('returns 0 as domain minimum when scale mode is linear', () => {
+    expect(domainMin(0, 'linear')).toEqual(0);
+  });
+
+  it('returns passed domain minimum when not equal 0 and scale mode is linear', () => {
+    expect(domainMin(2, 'linear')).toEqual(2);
+  });
+
+  it('returns 1e-6 as domain minimum when scale mode is not linear', () => {
+    expect(domainMin(0, 'logarithmic')).toEqual(1e-6);
+  });
+
+  it('returns passed domain minimum when not equal 0 and scale mode is logarithmic', () => {
+    expect(domainMin(2, 'logarithmic')).toEqual(2);
+  });
+});
+
+describe('scale', () => {
+  it('returns d3.scaleLinear as scale function when scale mode is linear', () => {
+    expect(scale('linear')).toEqual(d3.scaleLinear);
+  });
+
+  it('returns d3.scaleLog as scale function  when scale mode is not linear', () => {
+    expect(scale('logarithmic')).toEqual(d3.scaleLog);
   });
 });
