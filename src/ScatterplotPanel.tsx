@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { PanelProps, FieldType } from '@grafana/data';
 import { SimpleOptions } from 'types';
 import { css, cx } from 'emotion';
@@ -47,6 +47,10 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
     .scaleQuantize<string>()
     .range(selectedColorRange(options.colorRange))
     .domain([timeMin, timeMax]);
+
+  const legendBackgroundGradient: CSSProperties = {
+    background: 'linear-gradient(to top,' + selectedColorRange(options.colorRange).join(',') + ')',
+  };
 
   const renderPlot = allDataValues.length > 1 && allDataTimes.length > 1;
 
@@ -110,6 +114,16 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
           </text>
         </g>
       </svg>
+      {options.showLegend ? (
+        <div className={styles.legend} style={legendBackgroundGradient}>
+          <div className={styles.legendLabel}>
+            <div className={styles.legendLabelFrom}>{data.timeRange.from.format('Y-M-D HH:mm:ss')}</div>
+            <div className={styles.legendLabelTo}>{data.timeRange.to.format('Y-M-D HH:mm:ss')}</div>
+          </div>
+        </div>
+      ) : (
+        <div />
+      )}
     </div>
   );
 };
@@ -183,6 +197,30 @@ export const getStyles = stylesFactory(() => {
       position: absolute;
       top: 0;
       left: 0;
+    `,
+    legend: css`
+      height: 80%;
+      position: absolute;
+      right: 20px;
+      width: 12px;
+    `,
+    legendLabel: css`
+      writing-mode: tb-rl;
+      transform: rotate(-180deg);
+      position: absolute;
+      left: 12px;
+      font-size: 0.8em;
+      height: 100%;
+    `,
+    legendLabelFrom: css`
+      position: absolute;
+      text-align: start;
+      height: 100%;
+    `,
+    legendLabelTo: css`
+      position: absolute;
+      text-align: end;
+      height: 100%;
     `,
   };
 });

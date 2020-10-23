@@ -75,5 +75,10 @@ export const plugin = new PanelPlugin<SimpleOptions>(ScatterplotPanel).setPanelO
           },
         ],
       },
+    })
+    .addBooleanSwitch({
+      path: 'showLegend',
+      defaultValue: true,
+      name: 'Show Legend',
     });
 });

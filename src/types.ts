@@ -3,4 +3,5 @@ export interface SimpleOptions {
   circleRadius: string;
   scaleModeX: string;
   scaleModeY: string;
+  showLegend: boolean;
 }
