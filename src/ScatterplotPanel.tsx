@@ -1,7 +1,8 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { PanelProps, FieldType } from '@grafana/data';
 import { SimpleOptions } from 'types';
 import { css, cx } from 'emotion';
+import { Modal, Button } from '@grafana/ui';
 import * as d3 from 'd3';
 import {
   displayNegativeValueMessage,
@@ -49,6 +50,7 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
     .clamp(true);
   const yAxis = getAxis('left', yScale, options.scaleModeY);
 
+  // Color Gradient based on time range
   const timeMin = allDataTimes.length > 1 ? d3.min(allDataTimes[0]) : 0;
   const timeMax = allDataTimes.length > 1 ? d3.max(allDataTimes[0]) : 100;
   const colorScale = d3
@@ -56,10 +58,22 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
     .range(selectedColorRange(options.colorRange))
     .domain([timeMin, timeMax]);
 
+  // Legend
   const legendBackgroundGradient: CSSProperties = {
     background: 'linear-gradient(to top,' + selectedColorRange(options.colorRange).join(',') + ')',
   };
 
+  // Modal
+  const displayModal =
+    displayNegativeValueMessage(options.scaleModeX, allDataValues[0]) ||
+    displayNegativeValueMessage(options.scaleModeY, allDataValues[1]);
+
+  const modalBody =
+    "One of your time series contains negative values and can't be displayed on a logarithmic scale. Please select a linear scale.";
+  const [modalIsOpen, setModalIsOpen] = useState(displayModal);
+  const onModalClose = () => {
+    setModalIsOpen(false);
+  };
 
   return (
     <div
@@ -71,6 +85,14 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
         `
       )}
     >
+      <Modal className="modal" title="Warning" isOpen={modalIsOpen} onDismiss={onModalClose}>
+        {modalBody}
+        <div>
+          <Button className={styles.btnModalClose} variant="primary" onClick={onModalClose}>
+            Close
+          </Button>
+        </div>
+      </Modal>
       <svg
         className={styles.svg}
         width={width}
