@@ -135,7 +135,7 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
         </g>
       </svg>
       <div className="axisLabel left-yaxis-label">{data.series.length > 1 ? data.series[0].name : ''}</div>
-      <div className={styles.bottomXaxisLabel}>{data.series.length > 1 ? data.series[1].name : ''}</div>
+      <div className={`axisLabel ${styles.bottomXaxisLabel}`}>{data.series.length > 1 ? data.series[1].name : ''}</div>
       {options.showLegend ? (
         <div className={styles.legend} style={legendBackgroundGradient}>
           <div className={styles.legendLabel}>

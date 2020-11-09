@@ -109,11 +109,8 @@ export const getStyles = stylesFactory(() => {
       margin-top: 20px;
     `,
     bottomXaxisLabel: css`
-      font-size: 12px;
-      position: absolute;
       bottom: 8px;
       width: 100%;
-      text-align: center;
     `,
   };
 });
