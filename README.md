@@ -1,3 +1,5 @@
+![Yarn Test](https://github.com/twei55/grafana-scatterplot/workflows/Yarn%20Test/badge.svg?branch=master)
+
 # Grafana Scatterplot Plugin
 
 A Scatter plot is a type of plot to visualize the dependency between two variables over time. The data are displayed as a collection of points, 
