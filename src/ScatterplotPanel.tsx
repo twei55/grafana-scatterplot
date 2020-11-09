@@ -127,22 +127,15 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
               d3.select(node).call(xAxis as any);
             }}
           />
-          <text className="axisLabel" transform={`translate(${chartWidth / 2}, ${chartHeight + margin.bottom - 10})`}>
-            {data.series.length > 1 ? data.series[0].name : ''}
-          </text>
           <g
             ref={node => {
               d3.select(node).call(yAxis as any);
             }}
           />
-          <text
-            className="axisLabel"
-            transform={`rotate(-90), translate(${-(chartHeight / 2)}, ${-(margin.left - 10)})`}
-          >
-            {data.series.length > 1 ? data.series[1].name : ''}
-          </text>
         </g>
       </svg>
+      <div className="axisLabel left-yaxis-label">{data.series.length > 1 ? data.series[0].name : ''}</div>
+      <div className={styles.bottomXaxisLabel}>{data.series.length > 1 ? data.series[1].name : ''}</div>
       {options.showLegend ? (
         <div className={styles.legend} style={legendBackgroundGradient}>
           <div className={styles.legendLabel}>
