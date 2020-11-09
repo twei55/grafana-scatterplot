@@ -108,5 +108,9 @@ export const getStyles = stylesFactory(() => {
     btnModalClose: css`
       margin-top: 20px;
     `,
+    bottomXaxisLabel: css`
+      bottom: 8px;
+      width: 100%;
+    `,
   };
 });
