@@ -24,6 +24,8 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
   let allDataTimes: any[][] = [];
   [allDataValues, allDataTimes] = getValuesFromDataFrames(data.series);
 
+  const dateTimeFormat = 'Y-M-D HH:mm:ss';
+
   // Define chart margins
   const margin = { left: 50, top: 30, right: 30, bottom: 50 };
 
@@ -84,7 +86,7 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
       y: y,
       posLeft: left + 70,
       posTop: top + 20,
-      dateTime: dateTime(timestamp).format('Y-M-D HH:mm:ss')
+      dateTime: dateTime(timestamp).format(dateTimeFormat)
     });
     setTooltipIsHidden(false)
   };
@@ -172,8 +174,8 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
       {options.showLegend ? (
         <div className={styles.legend} style={legendBackgroundGradient}>
           <div className={styles.legendLabel}>
-            <div className={styles.legendLabelFrom}>{data.timeRange.from.format('Y-M-D HH:mm:ss')}</div>
-            <div className={styles.legendLabelTo}>{data.timeRange.to.format('Y-M-D HH:mm:ss')}</div>
+            <div className={styles.legendLabelFrom}>{data.timeRange.from.format(dateTimeFormat)}</div>
+            <div className={styles.legendLabelTo}>{data.timeRange.to.format(dateTimeFormat)}</div>
           </div>
         </div>
       ) : (

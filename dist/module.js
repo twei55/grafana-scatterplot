@@ -381,7 +381,8 @@ var ScatterplotPanel = function ScatterplotPanel(_a) {
   var circleRadius = options.circleRadius;
   var allDataValues = [];
   var allDataTimes = [];
-  _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__read"])(getValuesFromDataFrames(data.series), 2), allDataValues = _b[0], allDataTimes = _b[1]; // Define chart margins
+  _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__read"])(getValuesFromDataFrames(data.series), 2), allDataValues = _b[0], allDataTimes = _b[1];
+  var dateTimeFormat = 'Y-M-D HH:mm:ss'; // Define chart margins
 
   var margin = {
     left: 50,
@@ -442,7 +443,7 @@ var ScatterplotPanel = function ScatterplotPanel(_a) {
       y: y,
       posLeft: left + 70,
       posTop: top + 20,
-      dateTime: Object(_grafana_data__WEBPACK_IMPORTED_MODULE_2__["dateTime"])(timestamp).format('Y-M-D HH:mm:ss')
+      dateTime: Object(_grafana_data__WEBPACK_IMPORTED_MODULE_2__["dateTime"])(timestamp).format(dateTimeFormat)
     });
     setTooltipIsHidden(false);
   };
@@ -529,9 +530,9 @@ var ScatterplotPanel = function ScatterplotPanel(_a) {
     className: styles.legendLabel
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: styles.legendLabelFrom
-  }, data.timeRange.from.format('Y-M-D HH:mm:ss')), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, data.timeRange.from.format(dateTimeFormat)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: styles.legendLabelTo
-  }, data.timeRange.to.format('Y-M-D HH:mm:ss')))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null));
+  }, data.timeRange.to.format(dateTimeFormat)))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null));
 };
 var getValuesFromDataFrames = function getValuesFromDataFrames(dataSeries) {
   var allDataValues = [];
