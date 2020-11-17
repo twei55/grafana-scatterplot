@@ -117,9 +117,9 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
       <div className="graph-tooltip grafana-tooltip" hidden={tooltipIsHidden} style={{left: `${tooltipProps.posLeft}px`, top: `${tooltipProps.posTop}px`}}>
         <div className="graph-tooltip-time">{tooltipProps.dateTime}</div>
         {[tooltipProps.x, tooltipProps.y].map((name, index) => (
-          <div className="graph-tooltip-list-item ">
+          <div className="graph-tooltip-list-item" key={`valueSeries${index}`}>
             <div className="graph-tooltip-series-name">
-              {data.series[index].name}
+              { data.series[index] !== undefined && name in data.series[index] ? data.series[index].name : '' }
             </div>
             <div className="graph-tooltip-value">{name}</div>
           </div>

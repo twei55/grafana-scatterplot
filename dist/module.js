@@ -476,10 +476,11 @@ var ScatterplotPanel = function ScatterplotPanel(_a) {
     className: "graph-tooltip-time"
   }, tooltipProps.dateTime), [tooltipProps.x, tooltipProps.y].map(function (name, index) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "graph-tooltip-list-item "
+      className: "graph-tooltip-list-item",
+      key: "valueSeries" + index
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "graph-tooltip-series-name"
-    }, data.series[index].name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, data.series[index] !== undefined && name in data.series[index] ? data.series[index].name : ''), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "graph-tooltip-value"
     }, name));
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("svg", {
