@@ -480,7 +480,7 @@ var ScatterplotPanel = function ScatterplotPanel(_a) {
       key: "valueSeries" + index
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "graph-tooltip-series-name"
-    }, data.series[index] !== undefined && name in data.series[index] ? data.series[index].name : ''), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, data.series[index] !== undefined && 'name' in data.series[index] ? data.series[index].name : ''), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "graph-tooltip-value"
     }, name));
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("svg", {

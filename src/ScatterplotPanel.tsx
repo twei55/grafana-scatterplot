@@ -119,7 +119,7 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
         {[tooltipProps.x, tooltipProps.y].map((name, index) => (
           <div className="graph-tooltip-list-item" key={`valueSeries${index}`}>
             <div className="graph-tooltip-series-name">
-              { data.series[index] !== undefined && name in data.series[index] ? data.series[index].name : '' }
+              { data.series[index] !== undefined && 'name' in data.series[index] ? data.series[index].name : '' }
             </div>
             <div className="graph-tooltip-value">{name}</div>
           </div>
