@@ -77,7 +77,7 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
     setModalIsOpen(false);
   };
 
-  const [tooltipProps, setToolTipProps] = useState({ x: 0, y: 0, posLeft: 0, posTop: 0, dateTime: ''});
+  const [tooltipProps, setToolTipProps] = useState({ x: 0, y: 0, posLeft: 0, posTop: 0, dateTime: '' });
   const [tooltipIsHidden, setTooltipIsHidden] = useState(true);
 
   const showTooltip = (x: number, y: number, left: number, top: number, timestamp: number) => {
@@ -86,14 +86,14 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
       y: y,
       posLeft: left + 70,
       posTop: top + 20,
-      dateTime: dateTime(timestamp).format(dateTimeFormat)
+      dateTime: dateTime(timestamp).format(dateTimeFormat),
     });
-    setTooltipIsHidden(false)
+    setTooltipIsHidden(false);
   };
 
   const hideTooltip = () => {
-    setTimeout(() => setTooltipIsHidden(true), 500)
-  }
+    setTimeout(() => setTooltipIsHidden(true), 500);
+  };
 
   return (
     <div
@@ -114,12 +114,16 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
         </div>
       </Modal>
 
-      <div className="graph-tooltip grafana-tooltip" hidden={tooltipIsHidden} style={{left: `${tooltipProps.posLeft}px`, top: `${tooltipProps.posTop}px`}}>
+      <div
+        className="graph-tooltip grafana-tooltip"
+        hidden={tooltipIsHidden}
+        style={{ left: `${tooltipProps.posLeft}px`, top: `${tooltipProps.posTop}px` }}
+      >
         <div className="graph-tooltip-time">{tooltipProps.dateTime}</div>
         {[tooltipProps.x, tooltipProps.y].map((name, index) => (
           <div className="graph-tooltip-list-item" key={`valueSeries${index}`}>
             <div className="graph-tooltip-series-name">
-              { data.series[index] !== undefined && 'name' in data.series[index] ? data.series[index].name : '' }
+              {data.series[index] !== undefined && 'name' in data.series[index] ? data.series[index].name : ''}
             </div>
             <div className="graph-tooltip-value">{name}</div>
           </div>
@@ -147,10 +151,17 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
                   stroke="white"
                   strokeOpacity="0"
                   strokeWidth="5"
-                  onMouseMove={() => showTooltip(value, allDataValues[1][index], xScale(value), yScale(allDataValues[1][index]), allDataTimes[0][index])}
+                  onMouseMove={() =>
+                    showTooltip(
+                      value,
+                      allDataValues[1][index],
+                      xScale(value),
+                      yScale(allDataValues[1][index]),
+                      allDataTimes[0][index]
+                    )
+                  }
                   onMouseOut={hideTooltip}
-                >
-                </circle>
+                ></circle>
               ))
             ) : (
               <text transform={`translate(${chartWidth / 2 - 20}, ${chartHeight / 2 - 20})`}>No data</text>
