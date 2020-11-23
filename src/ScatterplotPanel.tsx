@@ -1,5 +1,5 @@
 import React, { CSSProperties, useState } from 'react';
-import { PanelProps, FieldType } from '@grafana/data';
+import { PanelProps, FieldType, dateTime } from '@grafana/data';
 import { SimpleOptions } from 'types';
 import { css, cx } from 'emotion';
 import { Modal, Button } from '@grafana/ui';
@@ -23,6 +23,8 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
   let allDataValues: any[][] = [];
   let allDataTimes: any[][] = [];
   [allDataValues, allDataTimes] = getValuesFromDataFrames(data.series);
+
+  const dateTimeFormat = 'Y-M-D HH:mm:ss';
 
   // Define chart margins
   const margin = { left: 50, top: 30, right: 30, bottom: 50 };
@@ -75,6 +77,24 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
     setModalIsOpen(false);
   };
 
+  const [tooltipProps, setToolTipProps] = useState({ x: 0, y: 0, posLeft: 0, posTop: 0, dateTime: '' });
+  const [tooltipIsHidden, setTooltipIsHidden] = useState(true);
+
+  const showTooltip = (x: number, y: number, left: number, top: number, timestamp: number) => {
+    setToolTipProps({
+      x: x,
+      y: y,
+      posLeft: left + 70,
+      posTop: top + 20,
+      dateTime: dateTime(timestamp).format(dateTimeFormat),
+    });
+    setTooltipIsHidden(false);
+  };
+
+  const hideTooltip = () => {
+    setTimeout(() => setTooltipIsHidden(true), 500);
+  };
+
   return (
     <div
       className={cx(
@@ -93,6 +113,23 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
           </Button>
         </div>
       </Modal>
+
+      <div
+        className="graph-tooltip grafana-tooltip"
+        hidden={tooltipIsHidden}
+        style={{ left: `${tooltipProps.posLeft}px`, top: `${tooltipProps.posTop}px` }}
+      >
+        <div className="graph-tooltip-time">{tooltipProps.dateTime}</div>
+        {[tooltipProps.x, tooltipProps.y].map((name, index) => (
+          <div className="graph-tooltip-list-item" key={`valueSeries${index}`}>
+            <div className="graph-tooltip-series-name">
+              {data.series[index] !== undefined && 'name' in data.series[index] ? data.series[index].name : ''}
+            </div>
+            <div className="graph-tooltip-value">{name}</div>
+          </div>
+        ))}
+      </div>
+
       <svg
         className={styles.svg}
         width={width}
@@ -111,11 +148,20 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
                   style={{ fill: `${colorScale(allDataTimes[0][index])}` }}
                   data-values={`${value}, ${allDataValues[1][index]}`}
                   r={circleRadius}
-                >
-                  <title>
-                    X: {`${value}`}, Y: {`${allDataValues[1][index]}`}
-                  </title>
-                </circle>
+                  stroke="white"
+                  strokeOpacity="0"
+                  strokeWidth="5"
+                  onMouseMove={() =>
+                    showTooltip(
+                      value,
+                      allDataValues[1][index],
+                      xScale(value),
+                      yScale(allDataValues[1][index]),
+                      allDataTimes[0][index]
+                    )
+                  }
+                  onMouseOut={hideTooltip}
+                ></circle>
               ))
             ) : (
               <text transform={`translate(${chartWidth / 2 - 20}, ${chartHeight / 2 - 20})`}>No data</text>
@@ -139,8 +185,8 @@ export const ScatterplotPanel: React.FC<Props> = ({ options, data, width, height
       {options.showLegend ? (
         <div className={styles.legend} style={legendBackgroundGradient}>
           <div className={styles.legendLabel}>
-            <div className={styles.legendLabelFrom}>{data.timeRange.from.format('Y-M-D HH:mm:ss')}</div>
-            <div className={styles.legendLabelTo}>{data.timeRange.to.format('Y-M-D HH:mm:ss')}</div>
+            <div className={styles.legendLabelFrom}>{data.timeRange.from.format(dateTimeFormat)}</div>
+            <div className={styles.legendLabelTo}>{data.timeRange.to.format(dateTimeFormat)}</div>
           </div>
         </div>
       ) : (

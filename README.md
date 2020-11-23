@@ -8,19 +8,50 @@ each having the value of one variable determining the position on the horizontal
 Additionally data points are color coded over time.
 
 ## Getting started
-1. Install dependencies
+
+Install dependencies
+
 ```BASH
 yarn install
 ```
-2. Build plugin in development mode or run in watch mode
+
+Build plugin in development mode or run in watch mode
+
 ```BASH
 yarn dev
 ```
 or
+
 ```BASH
 yarn watch
 ```
-3. Build plugin in production mode
+
+Build plugin in production mode
+
 ```BASH
 yarn build
+```
+
+## Test plugin with a local Grafana instance
+
+Create a folder named `grafana-scatterplot` in your local Grafana copy below `data/plugins`.
+
+Copy content of `dist` folder to `data/plugins/grafana-scatterplot` after running `yarn build`.
+
+Start Grafana backend
+
+```BASH
+make run
+```
+
+Increase number of open files if necessary
+
+```BASH
+ulimit -S -n 2048
+```
+
+Start Grafana frontend
+
+```BASH
+yarn start
 ```
