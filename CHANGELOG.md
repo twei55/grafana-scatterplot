@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.5.0
+
+Add proper tool tips to graph
+
+## v0.4.1
+
+Fix axis label for dark theme
+
 ## v0.4.0
 
 Add warning when time series contain negative values and logarithmic scale is selected.
