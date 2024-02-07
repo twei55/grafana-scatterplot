@@ -10,17 +10,17 @@
     },
     "keywords": ["scatterplot", "scatter diagram", "scatter"],
     "logos": {
-      "small": "img/scatter.svg",
-      "large": "img/scatter.svg"
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
     },
     "links": [
       {
         "name": "Website",
-        "url": "git.gfz-potsdam.de/tsm/grafana-scatterplot-panel"
+        "url": "https://github.com/twei55/grafana-timestamp-image-panel"
       },
       {
         "name": "License",
-        "url": "git.gfz-potsdam.de/tsm/grafana-scatterplot-panel/blob/master/LICENSE"
+        "url": "https://github.com/twei55/grafana-timestamp-image-panel/blob/main/LICENSE"
       }
     ],
     "screenshots": [],

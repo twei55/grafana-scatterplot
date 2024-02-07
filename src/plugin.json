@@ -16,15 +16,15 @@
     "links": [
       {
         "name": "Website",
-        "url": "git.gfz-potsdam.de/tsm/grafana-scatterplot-panel"
+        "url": "https://github.com/twei55/grafana-scatterplot"
       },
       {
         "name": "License",
-        "url": "git.gfz-potsdam.de/tsm/grafana-scatterplot-panel/blob/master/LICENSE"
+        "url": "https://github.com/twei55/grafana-scatterplot/blob/master/LICENSE"
       }
     ],
     "screenshots": [],
-    "version": "0.1.0",
+    "version": "0.5.0",
     "updated": "%TODAY%"
   },
   "dependencies": {
